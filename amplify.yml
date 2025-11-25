@@ -3,13 +3,12 @@ frontend:
   phases:
     preBuild:
       commands:
-        - echo "Instalando dependencias de Python..."
-        - pip install -r requirements.txt
+        - echo "No se requieren dependencias para el frontend estático"
     build:
       commands:
-        - echo "Build completado"
+        - echo "Frontend estático - no se requiere build"
   artifacts:
-    baseDirectory: /
+    baseDirectory: public
     files:
       - '**/*'
 backend:
