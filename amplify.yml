@@ -1,24 +1,11 @@
 version: 1
+# Solo API - sin frontend
 frontend:
   phases:
-    preBuild:
-      commands:
-        - echo "No se requieren dependencias para el frontend estático"
     build:
       commands:
-        - echo "Frontend estático - no se requiere build"
+        - echo "No frontend build needed"
   artifacts:
-    baseDirectory: public
+    baseDirectory: /
     files:
       - '**/*'
-backend:
-  phases:
-    build:
-      commands:
-        - echo "Backend build phase"
-        - pip install -r requirements.txt
-  artifacts:
-    baseDirectory: api
-    files:
-      - '**/*'
-

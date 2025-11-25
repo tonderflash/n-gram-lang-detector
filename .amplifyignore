@@ -1,0 +1,4 @@
+# Ignorar frontend - solo queremos la API
+public/index.html
+*.html
+
