@@ -36,11 +36,32 @@ En lugar de enseñarle latín (que habría sido confuso), hicimos algo más astu
     *   El modelo se enfocó solo en lo que hace *único* a cada idioma (como "the" en inglés o "el" en español).
     *   El texto en inglés culto bajó su puntaje de español del 43% al 26%, eliminando la falsa alarma de Spanglish.
 
+## 7. El Problema del Spanglish: Cuando la Solución Crea un Nuevo Problema
+Los modelos discriminativos funcionaban perfecto para idiomas puros, pero había un problema: **ya no detectaban Spanglish**.
+*   **¿Por qué?** Al eliminar los n-gramas compartidos, perdimos la capacidad de detectar cuando un texto realmente mezcla ambos idiomas.
+*   **El Dilema:** "Voy a hacer shopping porque necesito unos jeans nuevos" se clasificaba como 100% español, cuando claramente es Spanglish.
+*   **La Raíz del Problema:** Los modelos discriminativos son tan "puros" que cada n-grama solo pertenece a UN idioma, perdiendo la señal de mezcla.
+
+## 8. La Solución Híbrida: Lo Mejor de Ambos Mundos
+La solución final fue crear un **sistema híbrido** que combina ambos enfoques:
+*   **Modelo Original:** Detecta la "mezcla" (incluye n-gramas latinos compartidos que ayudan a ver overlap real).
+*   **Modelo Discriminativo:** Da precisión cuando es idioma puro (elimina el ruido latino).
+*   **La Lógica Híbrida:**
+    *   Si la diferencia entre idiomas es ≤15% → **Spanglish** (mezcla real).
+    *   Si la diferencia es 15-25% con evidencia discriminativa → **Spanglish**.
+    *   Si la diferencia es >25% → **Idioma puro** (usa discriminativo para precisión).
+*   **El Resultado:**
+    *   Detecta Spanglish correctamente: "I'm going to the tienda" → Spanglish ✓
+    *   Detecta español puro: "Ayer fuimos al cine" → Español 100% ✓
+    *   Detecta inglés puro: "Yesterday we went to see" → Inglés 100% ✓
+    *   Reduce falsos positivos de vocabulario latino en inglés formal.
+
 ## Conclusión
 Pasamos de un modelo básico que leía la Biblia a un sistema inteligente que:
 1.  Entiende vocabulario moderno.
 2.  Ignora el ruido.
-3.  Detecta cuando mezclas idiomas.
+3.  Detecta cuando mezclas idiomas (Spanglish) con precisión.
 4.  Sabe distinguir entre raíces latinas y español real.
+5.  Combina lo mejor de modelos originales y discriminativos para máxima precisión.
 
 ¡Misión cumplida! 🚀
